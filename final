@@ -1,0 +1,44 @@
+Housing Removing Problem:
+
+houses = [1,2,3,6,7,9]
+queries = [6,3,7,2,9,1]
+
+
+def build(houses,queries):
+    houses.sort()
+    last = houses[-1]
+    array = [0 for i in range(last)]
+    for i in range(len(houses)):
+        array[houses[i]-1] = 1
+
+    list = helper(array, queries)
+    return list
+
+def helper(array,queries):
+    list = []
+    for i in range(len(queries)):
+        array[queries[i]-1] = 0
+        segments = getSegements(array)
+        list.append(segments)
+    return list
+
+def getSegements(array):
+    flag = False
+    count = 0
+    for i in range(len(array)):
+        if array[i] == 1 and flag == False:
+            count +=1
+            flag = True
+        elif array[i] == 1 and flag == True:
+            continue
+        elif array[i] == 0:
+            flag = False
+    return count
+
+
+print(build(houses,queries))
+
+
+
+# build(houses,queries)
+print(build(houses,queries))
